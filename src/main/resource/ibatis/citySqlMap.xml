@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="calTotalCityNum" resultClass="int">
+		select count(1) from  city
+	</select>
+	
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectCityById" parameterClass="int" resultClass="com.myself.entity.City">
+		select * from city where id=#id#
+	</select>
+	
+	
+	<!-- 注意这里的resultClass类型，使用Student类型取决于queryForList还是queryForObject -->
+	<select id="selectStudentByDistrict" parameterClass="com.myself.entity.City" resultClass="com.myself.entity.City">
+		select * from city where district = #district#
+	</select>
+
+
+</sqlMap>
